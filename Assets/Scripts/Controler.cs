@@ -25,7 +25,10 @@ public class Controler : MonoBehaviour
     public bool fixedJumpForce = false;
     public float maxJumpForce = 20f;
     public float maxYVelocity = 20f;
-    public float lowestJumpForcePercentage = 0.7f;
+    public float lowestJumpForcePercentage = 0.6f;
+    public float middleJumpForcePercentage = 0.8f;
+    public float lowestJumpForceTimeLimit = 0.33f;
+    public float middleJumpForceTimeLimit = 0.66f;
     public float maxJumpingDelay = 1f;
     public float spikesDistance = 25f;
     public float fireDistance = 1f;
@@ -219,14 +222,14 @@ public class Controler : MonoBehaviour
 
     public void JumpingWithTimeDiff(System.TimeSpan ts)
     {
-        if(ts.Seconds > 1 || fixedJumpForce)
+        if(ts.Seconds > middleJumpForceTimeLimit || fixedJumpForce)
             YVelocity.y = maxJumpForce;
         else
         {
-            if(ts.Seconds < lowestJumpForcePercentage)
+            if(ts.Seconds < lowestJumpForceTimeLimit)
                 YVelocity.y = maxJumpForce * lowestJumpForcePercentage;
             else
-                YVelocity.y = maxJumpForce * ts.Seconds;
+                YVelocity.y = maxJumpForce * middleJumpForcePercentage;
         }
         BoostAnimation();
     }
