@@ -3290,7 +3290,7 @@ MonoBehaviour:
   aim: {fileID: 620280127}
   moveSpeed: 8
   gravityScale: 0.2
-  fixedJumpForce: 0
+  fixedJumpForce: 1
   maxJumpForce: 25
   maxYVelocity: 30
   lowestJumpForcePercentage: 0.33
