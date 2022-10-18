@@ -22,6 +22,7 @@ public class Controler : MonoBehaviour
     public AimControl aim;
     public float moveSpeed = 1f;
     public float gravityScale = 1f;
+    public bool fixedJumpForce = false;
     public float maxJumpForce = 20f;
     public float maxYVelocity = 20f;
     public float lowestJumpForcePercentage = 0.7f;
@@ -179,6 +180,7 @@ public class Controler : MonoBehaviour
             YVelocity.y = 0;
     }
 
+    //--------------------- Not in use ------------------------------
     void Jumping()
     {
         float xDistance = rightWall.position.x - player.position.x;
@@ -197,6 +199,7 @@ public class Controler : MonoBehaviour
         BoostAnimation();
     }
 
+    //--------------------- Not in use ------------------------------
     void JumpingWithVelocity(GameObject ball)
     {
         Rigidbody2D ballRigidBody = ball.GetComponent<Rigidbody2D>();
@@ -216,7 +219,7 @@ public class Controler : MonoBehaviour
 
     public void JumpingWithTimeDiff(System.TimeSpan ts)
     {
-        if(ts.Seconds > 1)
+        if(ts.Seconds > 1 || fixedJumpForce)
             YVelocity.y = maxJumpForce;
         else
         {
@@ -227,6 +230,8 @@ public class Controler : MonoBehaviour
         }
         BoostAnimation();
     }
+
+
 
     public Vector2 getYVelocity()
     {
