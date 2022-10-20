@@ -11,16 +11,11 @@ public class AimControl : MonoBehaviour
 
     public void Fire()
     {
+        portalAnimation.SetTrigger("Shoot");
+
         GameObject ball = Instantiate(ballObject, firePoint.position, firePoint.rotation);
         ball.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
 
-        FireAnimation();
-    }
-
-    void FireAnimation()
-    {
-        portalAnimation.SetTrigger("Shoot");
-        new WaitForSeconds(1);
         portalAnimation.SetTrigger("NormalPortal");
     }
 }

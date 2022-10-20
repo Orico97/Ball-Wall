@@ -12,6 +12,7 @@ public class BallControl : MonoBehaviour
     public float maxFallDistance = 300f;
     public float velocityToForceScale = 1;
     public Rigidbody2D ballRigidbody;
+    public Animator ballAnimation;
 
     private Vector2 YVelocity;
     private Vector2 originalPlace;
@@ -31,8 +32,12 @@ public class BallControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == wallLayer || collision.gameObject.layer == spikesLayer)
+        if( (collision.gameObject.layer == wallLayer || collision.gameObject.layer == spikesLayer) && (gameObject.layer != ballObjectLayer) )
+        {
             gameObject.layer = ballObjectLayer;
+            ballAnimation.SetTrigger("WallHit");
+            ballAnimation.SetTrigger("ConstantFlame");
+        }
 
         if (collision.gameObject.layer == floorLayer)
             Destroy(gameObject);
@@ -52,5 +57,7 @@ public class BallControl : MonoBehaviour
     {
         if(originalPlace.y - ballRigidbody.position.y > maxFallDistance)
             Destroy(gameObject);
+
+        ballRigidbody.rotation = Mathf.Atan2(ballRigidbody.velocity.y, ballRigidbody.velocity.x) * Mathf.Rad2Deg + 90f;
     }
 }

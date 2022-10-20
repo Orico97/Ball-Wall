@@ -12,7 +12,7 @@ public class OneHitBoostWall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.layer == noBoostballLayer || collision.gameObject.layer == ballObjectLayer) && !touched)
+        if ( (collision.gameObject.layer == noBoostballLayer || collision.gameObject.layer == ballObjectLayer) && !touched)
         {
             gameObject.layer = defaultLayer;
             gameObject.GetComponent<SpriteRenderer>().color = Color.black;
