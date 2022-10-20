@@ -33,12 +33,14 @@ public class Controler : MonoBehaviour
     public float spikesDistance = 25f;
     public float fireDistance = 1f;
     public int ballObjectLayer = 7;
+    public float fireRateInSeconds = 0.5f;
     public Animator player_animation;
     public GameObject ui;
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
 
     private float horizontal;
+    private float nextShotTime = 0.0f;
     private Vector2 moveInput;
     private Vector2 YVelocity;
     private Vector2 gravity;
@@ -136,7 +138,11 @@ public class Controler : MonoBehaviour
     {
         if (isPaused)
             return;
-        aim.Fire();
+        if (Time.time > nextShotTime)
+        {
+            nextShotTime = Time.time + fireRateInSeconds;
+            aim.Fire();
+        }
     }
 
     void OnPause()
