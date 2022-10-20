@@ -113,8 +113,7 @@ public class Controler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        int layer = collision.gameObject.layer;
-        if (layer != ballObjectLayer)
+        if (collision.gameObject.layer != ballObjectLayer)
         {
             YVelocity.y = 0;
         }
