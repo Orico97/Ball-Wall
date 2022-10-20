@@ -3750,6 +3750,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9213414719426100972, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.62333775
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719426100972, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6186573
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719426100972, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719426100972, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719426100975, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_Size.x
+      value: 5.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719426100975, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_Size.y
+      value: 6.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719426100975, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 65e9eb8fb13a157448510e365efe64c4, type: 3}
+    - target: {fileID: 9213414719426100975, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9213414719887258692, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3818,6 +3850,14 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 758051548}
+    - target: {fileID: 9213414719887258699, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: maxJumpForce
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719887258699, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: fixedJumpForce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9213414719887258699, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
       propertyPath: transformSpikes
       value: 
