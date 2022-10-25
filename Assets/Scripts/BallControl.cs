@@ -14,6 +14,7 @@ public class BallControl : MonoBehaviour
     public Rigidbody2D ballRigidbody;
     public Animator ballAnimation;
     public int maxCollisonNum = 20;
+    public bool affectedByPlayerYVelocity = true;
 
     private Vector2 YVelocity;
     private Vector2 originalPlace;
@@ -29,6 +30,8 @@ public class BallControl : MonoBehaviour
         controler = GameObject.FindObjectOfType<Controler>();
         YVelocity = controler.getYVelocity();
 
+        if (!affectedByPlayerYVelocity)
+            velocityToForceScale = 0f;
         ballRigidbody.AddForce(YVelocity * velocityToForceScale, ForceMode2D.Impulse);
     }
 

@@ -31,6 +31,7 @@ public class Controler : MonoBehaviour
     public float maxJumpingDelay = 1f;
     public float spikesDistance = 25f;
     public float fireDistance = 1f;
+    public int noBoostBallLayer = 3;
     public int ballObjectLayer = 7;
     public int spikesObjectLayer = 9;
     public float fireRateInSeconds = 0.5f;
@@ -39,6 +40,8 @@ public class Controler : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
     public bool stuckAtFirst = true;
+    public float centerYCorrectionForPlayer = 0f;
+    public float portalRotationAngleCorrection = 0f;
 
     private float horizontal;
     private float nextShotTime = 0.0f;
@@ -50,6 +53,7 @@ public class Controler : MonoBehaviour
     private ScoreManager scoreManager;
     private bool isPaused = false;
     private bool isDead = false;
+    private Vector2 aimDirection;
 
     private void Start()
     {
@@ -96,10 +100,11 @@ public class Controler : MonoBehaviour
         //mouse stuff:
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Vector2 aimDirection = mousePosition - player.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        Vector2 playerActualCenter = new Vector2(player.position.x, player.position.y + centerYCorrectionForPlayer);
+        aimDirection = mousePosition - playerActualCenter;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + portalRotationAngleCorrection;
         aimRigidbody.rotation = aimAngle;
-        aimRigidbody.position = player.position + aimDirection.normalized * fireDistance;
+        aimRigidbody.position = playerActualCenter + aimDirection.normalized * fireDistance;
 
         //jumping:
         //if (isBallTouching())
@@ -117,7 +122,7 @@ public class Controler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer != ballObjectLayer)
+        if (collision.gameObject.layer != ballObjectLayer && collision.gameObject.layer != noBoostBallLayer && collision.gameObject.layer != 0)
         {
             YVelocity.y = 0;
         }
@@ -215,7 +220,7 @@ public class Controler : MonoBehaviour
     void JumpingWithVelocity(GameObject ball)
     {
         Rigidbody2D ballRigidBody = ball.GetComponent<Rigidbody2D>();
-        float precentPower = 1 - (ballRigidBody.velocity.x / aim.fireForce);
+        float precentPower = 1 - (ballRigidBody.velocity.x / aim.maxFireForce);
 
         if (precentPower < lowestJumpForcePercentage)
             YVelocity.y = maxJumpForce * lowestJumpForcePercentage;
@@ -270,5 +275,10 @@ public class Controler : MonoBehaviour
     public void setYVelocity(float newYVelocity)
     {
         YVelocity.y = newYVelocity;
+    }
+
+    public Vector2 getAimDirection()
+    {
+        return aimDirection;
     }
 }

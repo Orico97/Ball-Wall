@@ -11942,6 +11942,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9213414718275694082, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9213414719887258692, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -12014,6 +12018,14 @@ PrefabInstance:
       propertyPath: transformSpikes
       value: 
       objectReference: {fileID: 1743417408}
+    - target: {fileID: 9213414719887258699, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: centerYCorrectionForPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719887258699, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: portalRotationAngleCorrection
+      value: 270
+      objectReference: {fileID: 0}
     - target: {fileID: 9213414719887258703, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
       propertyPath: m_Name
       value: Player
