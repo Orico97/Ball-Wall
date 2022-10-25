@@ -7,6 +7,7 @@ public class AimControl : MonoBehaviour
     public GameObject ballObject;
     public Transform firePoint;
     public float maxFireForce = 20f;
+    public bool useMouseDistanceFromPlayer = false;
     public float maxMousePowerDistance = 3f;
     public Animator portalAnimation;
 
@@ -30,7 +31,7 @@ public class AimControl : MonoBehaviour
         portalAnimation.SetTrigger("Shoot");
 
         float currentFireForce = maxFireForce;
-        if (aimDirection.magnitude < maxMousePowerDistance)
+        if (aimDirection.magnitude < maxMousePowerDistance && useMouseDistanceFromPlayer)
             currentFireForce = maxFireForce * (aimDirection.magnitude / maxMousePowerDistance);
         GameObject ball = Instantiate(ballObject, firePoint.position, firePoint.rotation);
         ball.GetComponent<Rigidbody2D>().AddForce(aimDirection.normalized * currentFireForce, ForceMode2D.Impulse);
