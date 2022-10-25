@@ -13,11 +13,13 @@ public class BallControl : MonoBehaviour
     public float velocityToForceScale = 1;
     public Rigidbody2D ballRigidbody;
     public Animator ballAnimation;
+    public int maxCollisonNum = 20;
 
     private Vector2 YVelocity;
     private Vector2 originalPlace;
     private Controler controler;
     private System.DateTime startTime;
+    private int collisonCount = 0;
 
     private void Awake()
     {
@@ -32,14 +34,16 @@ public class BallControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if( (collision.gameObject.layer == wallLayer || collision.gameObject.layer == spikesLayer) && (gameObject.layer != ballObjectLayer) )
+        collisonCount++;
+
+        if ( (collision.gameObject.layer == wallLayer || collision.gameObject.layer == spikesLayer) && (gameObject.layer != ballObjectLayer) )
         {
             gameObject.layer = ballObjectLayer;
             ballAnimation.SetTrigger("WallHit");
             ballAnimation.SetTrigger("ConstantFlame");
         }
 
-        if (collision.gameObject.layer == floorLayer)
+        if (collision.gameObject.layer == floorLayer || collisonCount > maxCollisonNum)
             Destroy(gameObject);
 
         if (collision.gameObject.layer == playerLayer)

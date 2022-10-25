@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using System.Collections;
 
 public class Controler : MonoBehaviour
 {
@@ -33,11 +32,13 @@ public class Controler : MonoBehaviour
     public float spikesDistance = 25f;
     public float fireDistance = 1f;
     public int ballObjectLayer = 7;
+    public int spikesObjectLayer = 9;
     public float fireRateInSeconds = 0.5f;
     public Animator player_animation;
     public GameObject ui;
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
+    public bool stuckAtFirst = true;
 
     private float horizontal;
     private float nextShotTime = 0.0f;
@@ -84,12 +85,13 @@ public class Controler : MonoBehaviour
         //gravity:
         if (YVelocity.y * (-1) < maxYVelocity)
             YVelocity += gravity;
-        if (isGrounded() && YVelocity.y < 0)
+        if ( (isGrounded() && YVelocity.y < 0) || stuckAtFirst)
             YVelocity.y = 0;
 
         //movement:
         Vector2 userMovement = moveInput * moveSpeed * Time.fixedDeltaTime;
-        player.MovePosition(player.position + userMovement + YVelocity * Time.fixedDeltaTime);
+        if (!stuckAtFirst)
+            player.MovePosition(player.position + userMovement + YVelocity * Time.fixedDeltaTime);
 
         //mouse stuff:
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -119,6 +121,8 @@ public class Controler : MonoBehaviour
         {
             YVelocity.y = 0;
         }
+        if (collision.gameObject.layer == spikesObjectLayer)
+            Death();
     }
 
     void BoostAnimation()
@@ -227,6 +231,8 @@ public class Controler : MonoBehaviour
 
     public void JumpingWithTimeDiff(System.TimeSpan ts)
     {
+        stuckAtFirst = false;
+
         if(ts.Seconds > middleJumpForceTimeLimit || fixedJumpForce)
             YVelocity.y = maxJumpForce;
         else
@@ -261,4 +267,8 @@ public class Controler : MonoBehaviour
         return gravityScale;
     }
 
+    public void setYVelocity(float newYVelocity)
+    {
+        YVelocity.y = newYVelocity;
+    }
 }

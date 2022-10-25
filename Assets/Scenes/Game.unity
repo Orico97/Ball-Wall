@@ -1079,7 +1079,7 @@ GameObject:
   - component: {fileID: 400685361}
   - component: {fileID: 400685360}
   - component: {fileID: 400685359}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2207,7 +2207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038700551}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2245,7 +2245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1087082455}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -2279,7 +2279,7 @@ GameObject:
   - component: {fileID: 1095107282}
   - component: {fileID: 1095107281}
   - component: {fileID: 1095107280}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Left Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3052,7 +3052,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1685147692}
   - component: {fileID: 1685147693}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: Third Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3500,7 +3500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1820275482}
   - component: {fileID: 1820275483}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: Second Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3584,7 +3584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1894208609}
   - component: {fileID: 1894208608}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: First Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4256,7 +4256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2035468003}
   - component: {fileID: 2035468004}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: Fourth Mark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4342,7 +4342,7 @@ GameObject:
   - component: {fileID: 2045263286}
   - component: {fileID: 2045263288}
   - component: {fileID: 2045263289}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Right Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4491,7 +4491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166667251306892117, guid: 0763e15967d5d3b4991d0cbcf778e933, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2166667251306892119, guid: 0763e15967d5d3b4991d0cbcf778e933, type: 3}
       propertyPath: m_RootOrder
