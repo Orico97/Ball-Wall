@@ -523,7 +523,7 @@ MonoBehaviour:
   spikesDistance: 25
   fireDistance: 2.45
   ballObjectLayer: 7
-  fireRateInSeconds: 0.98
+  fireRateInSeconds: 0.48
   player_animation: {fileID: 9213414719887258697}
   ui: {fileID: 0}
   pauseMenuUI: {fileID: 0}
