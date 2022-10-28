@@ -42,6 +42,7 @@ public class Controler : MonoBehaviour
     public bool stuckAtFirst = true;
     public float centerYCorrectionForPlayer = 0f;
     public float portalRotationAngleCorrection = 0f;
+    public float deathDelayTime = 0.2f;
 
     private float horizontal;
     private float nextShotTime = 0.0f;
@@ -126,8 +127,10 @@ public class Controler : MonoBehaviour
         {
             YVelocity.y = 0;
         }
-        if (collision.gameObject.layer == spikesObjectLayer)
-            Death();
+        if (collision.gameObject.layer == spikesObjectLayer){
+            player_animation.SetTrigger("isDead");
+            Invoke("Death", deathDelayTime);
+        }
     }
 
     void BoostAnimation()
@@ -187,6 +190,7 @@ public class Controler : MonoBehaviour
     public void Death()
     {
         isDead = true;
+        new WaitForSeconds(1f);
         deathMenuUI.SetActive(true);
         Time.timeScale = 0f;
     }
