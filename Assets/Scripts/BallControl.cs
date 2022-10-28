@@ -15,12 +15,16 @@ public class BallControl : MonoBehaviour
     public Animator ballAnimation;
     public int maxCollisonNum = 20;
     public bool affectedByPlayerYVelocity = true;
+    public SpriteRenderer ballRender;
 
     private Vector2 YVelocity;
     private Vector2 originalPlace;
     private Controler controler;
     private System.DateTime startTime;
+    private float nextColorChangeTime = 0f;
     private int collisonCount = 0;
+    private int countColorChange = 0;
+    private Vector4 addColor;
 
     private void Awake()
     {
@@ -33,6 +37,8 @@ public class BallControl : MonoBehaviour
         if (!affectedByPlayerYVelocity)
             velocityToForceScale = 0f;
         ballRigidbody.AddForce(YVelocity * velocityToForceScale, ForceMode2D.Impulse);
+
+        addColor = new Vector4(1, 0, 0, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -41,6 +47,7 @@ public class BallControl : MonoBehaviour
 
         if ( (collision.gameObject.layer == wallLayer || collision.gameObject.layer == spikesLayer) && (gameObject.layer != ballObjectLayer) )
         {
+            nextColorChangeTime = Time.time + 0.1f;
             gameObject.layer = ballObjectLayer;
             ballAnimation.SetTrigger("WallHit");
             ballAnimation.SetTrigger("ConstantFlame");
@@ -66,5 +73,17 @@ public class BallControl : MonoBehaviour
             Destroy(gameObject);
 
         ballRigidbody.rotation = Mathf.Atan2(ballRigidbody.velocity.y, ballRigidbody.velocity.x) * Mathf.Rad2Deg + 90f;
+        
+        /*if(gameObject.layer == ballObjectLayer && Time.time > nextColorChangeTime && countColorChange < 10)
+            changeColor();*/
+    }
+
+    private void changeColor()
+    {
+        nextColorChangeTime = Time.time + 0.1f;
+        countColorChange++;
+        Vector4 currentColor = ballRender.material.color;
+        currentColor += addColor;
+        ballRender.material.color = currentColor;
     }
 }

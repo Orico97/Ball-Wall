@@ -110,7 +110,8 @@ MonoBehaviour:
   ballRigidbody: {fileID: 4168795539153514213}
   ballAnimation: {fileID: 1445401887353274697}
   maxCollisonNum: 20
-  affectedByGravity: 0
+  affectedByPlayerYVelocity: 1
+  ballRender: {fileID: 2552362756572417104}
 --- !u!50 &4168795539153514213
 Rigidbody2D:
   serializedVersion: 4
