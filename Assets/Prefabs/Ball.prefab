@@ -109,9 +109,9 @@ MonoBehaviour:
   velocityToForceScale: 1
   ballRigidbody: {fileID: 4168795539153514213}
   ballAnimation: {fileID: 1445401887353274697}
-  maxCollisonNum: 20
-  explodeAfterXSeconds: 10
-  affectedByPlayerYVelocity: 0
+  maxCollisonNum: 2
+  explodeAfterXSeconds: 3
+  affectedByPlayerYVelocity: 1
   ballRender: {fileID: 0}
 --- !u!50 &4168795539153514213
 Rigidbody2D:
