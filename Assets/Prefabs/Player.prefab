@@ -238,7 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballObject: {fileID: 2552362756572417106, guid: 4c2a263e7b40113478ba10a00ee032ac, type: 3}
   firePoint: {fileID: 9213414718275694082}
-  fireForce: 20
+  maxFireForce: 20
+  useMouseDistanceFromPlayer: 0
+  maxMousePowerDistance: 3
   portalAnimation: {fileID: 9213414719426100969}
 --- !u!50 &9213414719426100974
 Rigidbody2D:
@@ -384,10 +386,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_AngularDrag: 0
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -511,7 +513,7 @@ MonoBehaviour:
   aimRigidbody: {fileID: 9213414719426100974}
   aim: {fileID: 9213414719426100973}
   moveSpeed: 8
-  gravityScale: 0.2
+  gravityScale: 0
   fixedJumpForce: 0
   maxJumpForce: 25
   maxYVelocity: 30
@@ -522,12 +524,19 @@ MonoBehaviour:
   maxJumpingDelay: 1
   spikesDistance: 25
   fireDistance: 2.45
+  noBoostBallLayer: 3
   ballObjectLayer: 7
+  spikesObjectLayer: 9
   fireRateInSeconds: 0.48
   player_animation: {fileID: 9213414719887258697}
+  aimObject: {fileID: 9213414719426100946}
   ui: {fileID: 0}
   pauseMenuUI: {fileID: 0}
   deathMenuUI: {fileID: 0}
+  stuckAtFirst: 1
+  centerYCorrectionForPlayer: 0
+  portalRotationAngleCorrection: 0
+  deathDelayTime: 0.2
 --- !u!70 &9213414719887258696
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

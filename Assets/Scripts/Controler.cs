@@ -36,6 +36,7 @@ public class Controler : MonoBehaviour
     public int spikesObjectLayer = 9;
     public float fireRateInSeconds = 0.5f;
     public Animator player_animation;
+    public GameObject aimObject;
     public GameObject ui;
     public GameObject pauseMenuUI;
     public GameObject deathMenuUI;
@@ -103,8 +104,11 @@ public class Controler : MonoBehaviour
 
         Vector2 playerActualCenter = new Vector2(player.position.x, player.position.y + centerYCorrectionForPlayer);
         aimDirection = mousePosition - playerActualCenter;
+        bool flipSpriteToRight = aimDirection.x > 0;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + portalRotationAngleCorrection;
-        aimRigidbody.rotation = aimAngle;
+
+        //aimRigidbody.rotation = aimAngle
+        aimObject.transform.rotation = Quaternion.Euler(new Vector3(0f, flipSpriteToRight ? 180f : 0f, flipSpriteToRight ? -aimAngle : aimAngle));
         aimRigidbody.position = playerActualCenter + aimDirection.normalized * fireDistance;
 
         //jumping:

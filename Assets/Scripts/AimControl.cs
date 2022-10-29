@@ -17,11 +17,6 @@ public class AimControl : MonoBehaviour
     private void Start()
     {
         controler = GameObject.FindObjectOfType<Controler>();
-        
-        /*float correctedAimAngle = Mathf.Atan2(firePoint.up.y, firePoint.up.x) * Mathf.Rad2Deg - portalRotationAngleCorrection;
-        float firePointUpX = Mathf.Sin(correctedAimAngle);
-        float firePointUpY = Mathf.Cos(correctedAimAngle);
-        firePointUpCorrected = new Vector2(firePointUpX, firePointUpY);*/
     }
 
     public void Fire()
@@ -33,6 +28,7 @@ public class AimControl : MonoBehaviour
         float currentFireForce = maxFireForce;
         if (aimDirection.magnitude < maxMousePowerDistance && useMouseDistanceFromPlayer)
             currentFireForce = maxFireForce * (aimDirection.magnitude / maxMousePowerDistance);
+
         GameObject ball = Instantiate(ballObject, firePoint.position, firePoint.rotation);
         ball.GetComponent<Rigidbody2D>().AddForce(aimDirection.normalized * currentFireForce, ForceMode2D.Impulse);
 

@@ -110,6 +110,7 @@ MonoBehaviour:
   ballRigidbody: {fileID: 4168795539153514213}
   ballAnimation: {fileID: 1445401887353274697}
   maxCollisonNum: 20
+  explodeAfterXSeconds: 10
   affectedByPlayerYVelocity: 0
   ballRender: {fileID: 0}
 --- !u!50 &4168795539153514213
@@ -127,7 +128,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.2
+  m_GravityScale: 2.5
   m_Material: {fileID: 6200000, guid: c978ee3c6d5067346b4583f3011c9fea, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1

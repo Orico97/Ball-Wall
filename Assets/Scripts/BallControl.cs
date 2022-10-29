@@ -14,6 +14,7 @@ public class BallControl : MonoBehaviour
     public Rigidbody2D ballRigidbody;
     public Animator ballAnimation;
     public int maxCollisonNum = 20;
+    public float explodeAfterXSeconds = 10f;
     public bool affectedByPlayerYVelocity = true;
     public SpriteRenderer ballRender;
 
@@ -21,6 +22,7 @@ public class BallControl : MonoBehaviour
     private Vector2 originalPlace;
     private Controler controler;
     private System.DateTime startTime;
+    private float startTimeFloat;
     private float nextColorChangeTime = 0f;
     private int collisonCount = 0;
     private int countColorChange = 0;
@@ -30,6 +32,7 @@ public class BallControl : MonoBehaviour
     {
         originalPlace = ballRigidbody.position;
         startTime = System.DateTime.UtcNow;
+        startTimeFloat = Time.time;
 
         controler = GameObject.FindObjectOfType<Controler>();
         YVelocity = controler.getYVelocity();
@@ -69,7 +72,7 @@ public class BallControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(originalPlace.y - ballRigidbody.position.y > maxFallDistance)
+        if(originalPlace.y - ballRigidbody.position.y > maxFallDistance || explodeAfterXSeconds + startTimeFloat < Time.time)
             Destroy(gameObject);
 
         ballRigidbody.rotation = Mathf.Atan2(ballRigidbody.velocity.y, ballRigidbody.velocity.x) * Mathf.Rad2Deg + 90f;
