@@ -164,8 +164,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9213414719426100946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.45, z: 0}
-  m_LocalScale: {x: 1.4633254, y: 0.6889099, z: 1}
+  m_LocalPosition: {x: -2.08, y: 0.6, z: 0}
+  m_LocalScale: {x: 0.62333775, y: 0.6186573, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9213414718275694082}
@@ -213,15 +213,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7daba04f4ea4d044c8d424dec1300a84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 65e9eb8fb13a157448510e365efe64c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.13, y: 6.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &9213414719426100973
@@ -312,7 +312,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9213414719887258703}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.0116997, y: 7.333299, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -513,10 +513,10 @@ MonoBehaviour:
   aimRigidbody: {fileID: 9213414719426100974}
   aim: {fileID: 9213414719426100973}
   moveSpeed: 8
-  gravityScale: 0
-  fixedJumpForce: 0
-  maxJumpForce: 25
-  maxYVelocity: 30
+  gravityScale: 0.2
+  fixedJumpForce: 1
+  maxJumpForce: 12
+  maxYVelocity: 4
   lowestJumpForcePercentage: 0.33
   middleJumpForcePercentage: 0.8
   lowestJumpForceTimeLimit: 0.33
@@ -527,15 +527,15 @@ MonoBehaviour:
   noBoostBallLayer: 3
   ballObjectLayer: 7
   spikesObjectLayer: 9
-  fireRateInSeconds: 0.48
+  fireRateInSeconds: 0.75
   player_animation: {fileID: 9213414719887258697}
   aimObject: {fileID: 9213414719426100946}
   ui: {fileID: 0}
   pauseMenuUI: {fileID: 0}
   deathMenuUI: {fileID: 0}
   stuckAtFirst: 1
-  centerYCorrectionForPlayer: 0
-  portalRotationAngleCorrection: 0
+  centerYCorrectionForPlayer: 0.75
+  portalRotationAngleCorrection: 180
   deathDelayTime: 0.2
 --- !u!70 &9213414719887258696
 CapsuleCollider2D:
