@@ -3205,6 +3205,14 @@ PrefabInstance:
       propertyPath: transformSpikes
       value: 
       objectReference: {fileID: 1909390977}
+    - target: {fileID: 9213414719887258699, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: enableScriptGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213414719887258702, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9213414719887258703, guid: ccb88c017560cb74684493f3d9ef664c, type: 3}
       propertyPath: m_Name
       value: Player
