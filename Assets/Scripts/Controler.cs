@@ -25,10 +25,7 @@ public class Controler : MonoBehaviour
     public float maxJumpForce = 20f;
     public float maxYVelocity = 20f;
     public float lowestJumpForcePercentage = 0.6f;
-    public float middleJumpForcePercentage = 0.8f;
     public float lowestJumpForceTimeLimit = 0.33f;
-    public float middleJumpForceTimeLimit = 0.66f;
-    public float maxJumpingDelay = 1f;
     public float spikesDistance = 25f;
     public float fireDistance = 1f;
     public int noBoostBallLayer = 3;
@@ -246,14 +243,14 @@ public class Controler : MonoBehaviour
     {
         stuckAtFirst = false;
 
-        if(ts.Seconds > middleJumpForceTimeLimit || fixedJumpForce)
+        if(fixedJumpForce || ts.Seconds > 1)
             YVelocity.y = maxJumpForce;
         else
         {
             if(ts.Seconds < lowestJumpForceTimeLimit)
                 YVelocity.y = maxJumpForce * lowestJumpForcePercentage;
             else
-                YVelocity.y = maxJumpForce * middleJumpForcePercentage;
+                YVelocity.y = maxJumpForce * ts.Seconds;
         }
         BoostAnimation();
     }

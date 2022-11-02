@@ -389,7 +389,7 @@ Rigidbody2D:
   m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 0.2
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -514,14 +514,11 @@ MonoBehaviour:
   aim: {fileID: 9213414719426100973}
   moveSpeed: 8
   gravityScale: 0.2
-  fixedJumpForce: 1
-  maxJumpForce: 12
-  maxYVelocity: 4
-  lowestJumpForcePercentage: 0.33
-  middleJumpForcePercentage: 0.8
+  fixedJumpForce: 0
+  maxJumpForce: 20
+  maxYVelocity: 8
+  lowestJumpForcePercentage: 0.6
   lowestJumpForceTimeLimit: 0.33
-  middleJumpForceTimeLimit: 0.66
-  maxJumpingDelay: 1
   spikesDistance: 25
   fireDistance: 2.45
   noBoostBallLayer: 3

@@ -16,17 +16,19 @@ public class BallControl : MonoBehaviour
     public int maxCollisonNum = 20;
     public float explodeAfterXSeconds = 10f;
     public bool affectedByPlayerYVelocity = true;
-    public SpriteRenderer ballRender;
+    public Renderer ballRender;
+    public Color startColor;
+    public Color endColor;
+    public float colorChangeSpeed = 1f;
 
     private Vector2 YVelocity;
     private Vector2 originalPlace;
     private Controler controler;
     private System.DateTime startTime;
+    private System.DateTime wallHitTime;
     private float startTimeFloat;
-    private float nextColorChangeTime = 0f;
+    private float wallHitTimeFloat;
     private int collisonCount = 0;
-    private int countColorChange = 0;
-    private Vector4 addColor;
 
     private void Awake()
     {
@@ -36,12 +38,13 @@ public class BallControl : MonoBehaviour
 
         controler = GameObject.FindObjectOfType<Controler>();
         YVelocity = controler.getYVelocity();
+        Vector2 aimDirection = controler.getAimDirection();
+        if(aimDirection.x > 0)
+            gameObject.transform.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0));
 
         if (!affectedByPlayerYVelocity)
             velocityToForceScale = 0f;
         ballRigidbody.AddForce(YVelocity * velocityToForceScale, ForceMode2D.Impulse);
-
-        addColor = new Vector4(1, 0, 0, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -50,7 +53,8 @@ public class BallControl : MonoBehaviour
 
         if ( (collision.gameObject.layer == wallLayer || collision.gameObject.layer == spikesLayer) && (gameObject.layer != ballObjectLayer) )
         {
-            nextColorChangeTime = Time.time + 0.1f;
+            wallHitTime = System.DateTime.UtcNow;
+            wallHitTimeFloat = Time.time;
             gameObject.layer = ballObjectLayer;
             ballAnimation.SetTrigger("WallHit");
             ballAnimation.SetTrigger("ConstantFlame");
@@ -64,7 +68,7 @@ public class BallControl : MonoBehaviour
             Destroy(gameObject);
             if(gameObject.layer == ballObjectLayer)
             {
-                System.TimeSpan ts = System.DateTime.UtcNow - startTime;
+                System.TimeSpan ts = System.DateTime.UtcNow - wallHitTime;
                 controler.JumpingWithTimeDiff(ts);
             }
         }
@@ -77,16 +81,13 @@ public class BallControl : MonoBehaviour
 
         ballRigidbody.rotation = Mathf.Atan2(ballRigidbody.velocity.y, ballRigidbody.velocity.x) * Mathf.Rad2Deg + 90f;
         
-        /*if(gameObject.layer == ballObjectLayer && Time.time > nextColorChangeTime && countColorChange < 10)
-            changeColor();*/
+        if(gameObject.layer == ballObjectLayer)
+            changeColor();
     }
 
     private void changeColor()
     {
-        nextColorChangeTime = Time.time + 0.1f;
-        countColorChange++;
-        Vector4 currentColor = ballRender.material.color;
-        currentColor += addColor;
-        ballRender.material.color = currentColor;
+        float changeAmount = colorChangeSpeed * (Time.time - wallHitTimeFloat);
+        ballRender.material.color = Color.Lerp(startColor, endColor, changeAmount);
     }
 }

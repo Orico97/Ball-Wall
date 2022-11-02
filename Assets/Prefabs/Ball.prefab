@@ -110,9 +110,12 @@ MonoBehaviour:
   ballRigidbody: {fileID: 4168795539153514213}
   ballAnimation: {fileID: 1445401887353274697}
   maxCollisonNum: 2
-  explodeAfterXSeconds: 3
+  explodeAfterXSeconds: 10
   affectedByPlayerYVelocity: 1
-  ballRender: {fileID: 0}
+  ballRender: {fileID: 2552362756572417104}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 0.30817604, b: 0.30817604, a: 1}
+  colorChangeSpeed: 1
 --- !u!50 &4168795539153514213
 Rigidbody2D:
   serializedVersion: 4
