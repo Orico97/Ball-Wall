@@ -20,12 +20,14 @@ public class Controler : MonoBehaviour
     public Rigidbody2D aimRigidbody;
     public AimControl aim;
     public float moveSpeed = 1f;
+    public bool enableScriptGravity = true;
     public float gravityScale = 1f;
     public bool fixedJumpForce = false;
     public float maxJumpForce = 20f;
     public float maxYVelocity = 20f;
     public float lowestJumpForcePercentage = 0.6f;
     public float lowestJumpForceTimeLimit = 0.33f;
+    public float maxJumpTimeLimit = 1f;
     public float spikesDistance = 25f;
     public float fireDistance = 1f;
     public int noBoostBallLayer = 3;
@@ -58,6 +60,12 @@ public class Controler : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
 
+        if (enableScriptGravity == false)
+            gravityScale = 0f;
+
+        if (stuckAtFirst)
+            player.constraints = RigidbodyConstraints2D.FreezePositionY;
+
         YVelocity.x = 0;
         YVelocity.y = 0;
         gravity.x = 0;
@@ -88,7 +96,7 @@ public class Controler : MonoBehaviour
         //gravity:
         if (YVelocity.y * (-1) < maxYVelocity)
             YVelocity += gravity;
-        if ( (isGrounded() && YVelocity.y < 0) || stuckAtFirst)
+        if ( (isGrounded() && YVelocity.y < 0) || stuckAtFirst || enableScriptGravity == false)
             YVelocity.y = 0;
 
         //movement:
@@ -107,10 +115,6 @@ public class Controler : MonoBehaviour
         //aimRigidbody.rotation = aimAngle
         aimObject.transform.rotation = Quaternion.Euler(new Vector3(0f, flipSpriteToRight ? 180f : 0f, flipSpriteToRight ? -aimAngle : aimAngle));
         aimRigidbody.position = playerActualCenter + aimDirection.normalized * fireDistance;
-
-        //jumping:
-        //if (isBallTouching())
-        //    Jumping();
 
         /*//Bottom spikes movment:
         Vector2 distance = new Vector2((-1) * player.position.x, (-1) * spikesDistance);
@@ -241,17 +245,35 @@ public class Controler : MonoBehaviour
 
     public void JumpingWithTimeDiff(System.TimeSpan ts)
     {
+        if(stuckAtFirst)
+        {
+            player.constraints = RigidbodyConstraints2D.None;
+            player.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         stuckAtFirst = false;
+        float power = 0f;
 
-        if(fixedJumpForce || ts.Seconds > 1)
-            YVelocity.y = maxJumpForce;
+        if(fixedJumpForce || ts.Seconds > maxJumpTimeLimit)
+            power = maxJumpForce;
         else
         {
-            if(ts.Seconds < lowestJumpForceTimeLimit)
-                YVelocity.y = maxJumpForce * lowestJumpForcePercentage;
+            float jumpPercentage;
+            if (maxJumpTimeLimit - lowestJumpForceTimeLimit <= 0)
+                jumpPercentage = 0;
             else
-                YVelocity.y = maxJumpForce * ts.Seconds;
+                jumpPercentage = ((ts.Seconds - lowestJumpForceTimeLimit) / (maxJumpTimeLimit - lowestJumpForceTimeLimit)) * (1 - lowestJumpForcePercentage) + lowestJumpForcePercentage;
+
+            if (ts.Seconds < lowestJumpForceTimeLimit)
+                power = maxJumpForce * lowestJumpForcePercentage;
+            else
+                power = maxJumpForce * jumpPercentage;
         }
+
+        if (enableScriptGravity)
+            YVelocity.y = power;
+        else
+            player.AddForce(power * Vector2.up , ForceMode2D.Impulse);
+
         BoostAnimation();
     }
 
@@ -285,5 +307,15 @@ public class Controler : MonoBehaviour
     public Vector2 getAimDirection()
     {
         return aimDirection;
+    }
+
+    public float getLowestJumpForceTimeLimit()
+    {
+        return lowestJumpForceTimeLimit;
+    }
+
+    public float getMaxJumpTimeLimit()
+    {
+        return maxJumpTimeLimit;
     }
 }

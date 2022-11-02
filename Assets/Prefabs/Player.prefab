@@ -513,12 +513,14 @@ MonoBehaviour:
   aimRigidbody: {fileID: 9213414719426100974}
   aim: {fileID: 9213414719426100973}
   moveSpeed: 8
+  enableScriptGravity: 1
   gravityScale: 0.2
   fixedJumpForce: 0
   maxJumpForce: 20
   maxYVelocity: 8
   lowestJumpForcePercentage: 0.6
   lowestJumpForceTimeLimit: 0.33
+  maxJumpTimeLimit: 1
   spikesDistance: 25
   fireDistance: 2.45
   noBoostBallLayer: 3

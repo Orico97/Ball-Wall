@@ -19,7 +19,6 @@ public class BallControl : MonoBehaviour
     public Renderer ballRender;
     public Color startColor;
     public Color endColor;
-    public float colorChangeSpeed = 1f;
 
     private Vector2 YVelocity;
     private Vector2 originalPlace;
@@ -28,6 +27,7 @@ public class BallControl : MonoBehaviour
     private System.DateTime wallHitTime;
     private float startTimeFloat;
     private float wallHitTimeFloat;
+    private float maxJumpTimeLimit;
     private int collisonCount = 0;
 
     private void Awake()
@@ -39,7 +39,10 @@ public class BallControl : MonoBehaviour
         controler = GameObject.FindObjectOfType<Controler>();
         YVelocity = controler.getYVelocity();
         Vector2 aimDirection = controler.getAimDirection();
-        if(aimDirection.x > 0)
+        maxJumpTimeLimit = controler.getMaxJumpTimeLimit();
+
+
+        if (aimDirection.x > 0)
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0));
 
         if (!affectedByPlayerYVelocity)
@@ -87,7 +90,14 @@ public class BallControl : MonoBehaviour
 
     private void changeColor()
     {
-        float changeAmount = colorChangeSpeed * (Time.time - wallHitTimeFloat);
+        float timeDiffSinceWallHit = Time.time - wallHitTimeFloat;
+        float changeAmount;
+
+        if (timeDiffSinceWallHit > maxJumpTimeLimit)
+            changeAmount = 1;
+        else
+            changeAmount = timeDiffSinceWallHit / maxJumpTimeLimit;
+
         ballRender.material.color = Color.Lerp(startColor, endColor, changeAmount);
     }
 }

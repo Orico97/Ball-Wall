@@ -17,12 +17,12 @@ public class DestructableWalls : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == noBoostballLayer || collision.gameObject.layer == ballObjectLayer)
-            Destroy(gameObject);
         if (collision.gameObject.layer == playerLayer)
         {
             Destroy(gameObject);
             controler.Death();
         }
+        else
+            Destroy(gameObject);
     }
 }
